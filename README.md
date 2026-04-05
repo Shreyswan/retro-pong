@@ -23,7 +23,7 @@ Enjoy your days with this simple yet nostalgic game of pong!!
 
 # V1.1 Retro Pong:
 
-** New update! **
+New update!
 Guess what, this lovely game now has a voice, enjoy these custom made start-up and game sounds.
 
 (Fun fact: These sounds were made using a python code I made from scratch. Enjoy!)
