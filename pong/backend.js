@@ -22,6 +22,30 @@ let dyd = Math.floor(Math.random() * 2);
 const keysPressed = {};
 const bezelSize = 25;
 
+// var sfx = {
+//   push: new Howl({
+//     src: ["https://assets.codepen.io/21542/howler-push.mp3"],
+//   }),
+//   boost: new Howl({
+//     src: ["https://assets.codepen.io/21542/howler-sfx-levelup.mp3"],
+//     loop: false,
+//     onend: function () {
+//       console.log("Done playing sfx!");
+//     },
+//   }),
+// };
+
+var music = {
+  startUp: new Howl({
+    src: ["./assets/startup_tune.wav"],
+  }),
+
+  gameSound: new Howl({
+    src: ["./assets/game_tune.wav"],
+    loop: true,
+  }),
+};
+
 window.addEventListener("keydown", (e) => {
   keysPressed[e.key] = true;
 });
@@ -73,12 +97,20 @@ function movePaddles() {
 
 requestAnimationFrame(movePaddles);
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", async (e) => {
   if (e.key == "Enter") {
     gameState = gameState == "start" ? "play" : "start";
     if (gameState == "play") {
+      music.startUp.play();
+      message.innerHTML = "Game Starting...";
+      await new Promise((r) => setTimeout(r, 1000));
+      message.innerHTML = "Game Starting..";
+      await new Promise((r) => setTimeout(r, 1000));
+      message.innerHTML = "Game Starting.";
+      await new Promise((r) => setTimeout(r, 1000));
       message.innerHTML = "Game Started";
       message.style.left = 42 + "vw";
+      music.gameSound.play();
       requestAnimationFrame(() => {
         dx = Math.floor(Math.random() * 4) + 10;
         dy = Math.floor(Math.random() * 4) + 10;
@@ -128,6 +160,8 @@ function moveBall(dx, dy, dxd, dyd) {
     }
     gameState = "start";
 
+    // document.getElementById("background-music").pause();
+    music.gameSound.pause();
     ball_coord = initial_ball_coord;
     ball.style = initial_ball.style;
     message.innerHTML = "Press Enter to Play Pong";

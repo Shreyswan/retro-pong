@@ -184,3 +184,9 @@ body {
   left: 38vw;
   margin: 30px auto auto auto;
 }
+
+.icon {
+  height: 200px;
+  width: 200px;
+  size: 0px;
+}
